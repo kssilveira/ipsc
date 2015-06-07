@@ -42,6 +42,8 @@ class testcase(object):
 
     def newtile(self):
         zeros = self.line.count(0)
+        if not zeros:
+            return False
         pos = self.random() % zeros
         if (self.random() % 10) == 0:
             new_value = 4
@@ -53,6 +55,7 @@ class testcase(object):
                 if cnt == pos:
                     self.line[x] = new_value
                 cnt += 1
+        return True
 
 
     def solve(self):
@@ -85,11 +88,12 @@ class testcase(object):
             if c == 'r':
                 self.line = self.line[::-1]
 
-            if effect:
-                self.newtile()
 
             for x in range(len(self.line)):
                 self.line[x] = abs(self.line[x])
+            if effect:
+                if not self.newtile():
+                    break
         print ' '.join(map(str,self.line))
 
 
