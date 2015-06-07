@@ -1,5 +1,4 @@
 
-
 r, s, m = 43, 22, 2 ** 32
 
 class random(object):
@@ -94,7 +93,7 @@ class testcase(object):
             if effect:
                 if not self.newtile():
                     break
-        print ' '.join(map(str,self.line))
+        return ' '.join(map(str, self.line))
 
 
 
@@ -117,5 +116,8 @@ for line in lines:
         cur_lines.append(line)
 
 
-for case in testcases:
-    case.solve()
+with open('b.out', 'w') as f:
+    for case in testcases:
+        sol = case.solve()
+        print sol
+        f.write(sol)
