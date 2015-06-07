@@ -42,7 +42,7 @@ class testcase(object):
     def newtile(self):
         zeros = self.line.count(0)
         if not zeros:
-            return False
+            raise AssertionError
         pos = self.random() % zeros
         if (self.random() % 10) == 0:
             new_value = 4
@@ -56,12 +56,16 @@ class testcase(object):
                 cnt += 1
         return True
 
-
     def solve(self):
-        for c in self.moves:
+
+        for ch in self.moves:
             effect = False
-            if c == 'r':
+            if ch == 'r':
                 self.line = self.line[::-1]
+
+            zeros = self.line.count(0)
+            self.line = filter(lambda x : x > 0, self.line) + [0] * zeros  # heuristics, must only increase speed
+
             for pos in range(len(self.line)):
                 if self.line[pos] != 0:
                     newpos = pos
@@ -78,28 +82,29 @@ class testcase(object):
                                 if newpos + 1 != pos:
                                     effect = True
                                     break
+                                else:
+                                    break
                         else:
-                            if newpos == 0:
-                                self.line[newpos], self.line[pos] = self.line[pos], self.line[newpos]
+                            if newpos == 0 and pos != 0:
+                                self.line[0] = self.line[pos]
+                                self.line[pos] = 0
                                 effect = True
                                 break
 
-            if c == 'r':
+            if ch == 'r':
                 self.line = self.line[::-1]
-
 
             for x in range(len(self.line)):
                 self.line[x] = abs(self.line[x])
             if effect:
-                if not self.newtile():
-                    break
+                self.newtile()
         return ' '.join(map(str, self.line))
 
 
 
 
 
-with open('b1.in') as f:
+with open('b1 (1).in') as f:
     lines = f.read().splitlines()
 
 tests = int(lines[0])
@@ -120,4 +125,4 @@ with open('b.out', 'w') as f:
     for case in testcases:
         sol = case.solve()
         print sol
-        f.write(sol)
+        f.write(sol + '\n')
