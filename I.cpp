@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
 vector< vector<int> > g;
@@ -15,20 +16,45 @@ int go_size(int a) {
   return tsize[a] = ret;
 }
 
-bool my_sort(int i,int j) { return tsize[i] < tsize[j]; }
+vector<pair<int, int> > huffmann(vector<int> &v) {
+  if (v.size() == 0) return vector<pair<int, int> >();
+
+  int total = 0;
+  for (int i = 0; i < v.size(); ++i) total += tsize[v[i]];
+
+  priority_queue<pair<float, vector<pair<int, int> > >,
+     vector<pair<float, vector<pair<int, int> > > >,
+     greater<pair<float, vector<pair<int, int> > > > > pq;
+  for (int i = 0; i < v.size(); ++i) {
+    vector<pair<int,int> > vv;
+    vv.push_back(make_pair(v[i], 1));
+    pq.push(make_pair(1.0*tsize[v[i]]/total, vv));
+  }
+
+  while (pq.size() > 1) {
+    pair<float, vector<pair<int, int> > > p1 = pq.top(); pq.pop();
+    pair<float, vector<pair<int, int> > > p2 = pq.top(); pq.pop();
+
+    vector<pair<int, int> > pv = p1.second;
+    pv.insert(pv.end(), p2.second.begin(), p2.second.end());
+    for (int i = 0; i < pv.size(); ++i) {
+      pv[i].second++;
+    }
+    pq.push(make_pair(p1.first+p2.first, pv));
+  }
+  return pq.top().second;
+}
 
 int go(int a, int pr) {
   int ret = pr;
 
-  // order by size of subtree.
-  sort(g[a].begin(), g[a].end(), my_sort);
+  //cout << endl << "go " << a << " " << g[a].size() << endl;
+  vector<pair<int, int> > vh = huffmann(g[a]);
+  //for (int i = 0; i < vh.size(); ++i)
+  //  cout << vh[i].first << " " << vh[i].second << endl;
 
-  int x = g[a].size();
-  int k = ceil(log2(x));
-  int t = x - (pow(2.0f, k) - x);  // +1 size
-
-  for (int i = 0; i < g[a].size(); ++i) {
-    ret += go(g[a][i], pr+k-(i>=t));
+  for (int i = 0; i < vh.size(); ++i) {
+    ret += go(vh[i].first, pr+vh[i].second-1);
   }
   return ret;
 }
