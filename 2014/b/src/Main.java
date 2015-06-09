@@ -1,5 +1,6 @@
 import java.io.*;
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -10,10 +11,12 @@ public class Main {
     Scanner in;
     PrintWriter out;
 
+    BigInteger TWO = BigInteger.valueOf(2);
+
     void run() throws IOException {
 
         in = new Scanner(new FileReader("b1 (1).in"));
-        out = new PrintWriter(new FileWriter("b.out"));
+        out = new PrintWriter(new FileWriter("b.out(2)"));
 
         long t = nextLong();
         for (long j = 0; j < t; ++j) {
@@ -113,7 +116,7 @@ public class Main {
         }
 
         for (int i = 0; i < strip.length; ++i) {
-            print((strip[i] == 0 ? 0 : 1 << strip[i]), i == strip.length - 1);
+            print((strip[i] == 0 ? BigInteger.ZERO : TWO.pow((int) strip[i])), i == strip.length - 1);
         }
 
     }
@@ -156,7 +159,7 @@ public class Main {
         }
     }
 
-    void print(long i, boolean newline) {
+    void print(BigInteger i, boolean newline) {
         out.print(i);
         if (newline) {
             out.print('\n');
