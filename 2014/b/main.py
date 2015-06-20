@@ -3,7 +3,7 @@ r, s, m = 43, 22, 2 ** 32
 
 class random(object):
     def __init__(self, seed):
-        self.x = seed
+        self.x = list(seed)
         self.c_store = {}
 
     def c(self, i):
@@ -17,11 +17,10 @@ class random(object):
     def rand(self, i):
         if i > len(self.x):
             self.rand(i-1)
-        elif i < len(self.x) - 1:
+        elif i < len(self.x):
             return self.x[i]
-        else:
-            self.x.append((self.x[i - s] - self.x[i - r] - self.c(i-1)) % m)
-            return self.x[-1]
+        self.x.append((self.x[i - s] - self.x[i - r] - self.c(i-1)) % m)
+        return self.x[-1]
 
 
 class testcase(object):
@@ -64,6 +63,7 @@ class testcase(object):
                 self.line = self.line[::-1]
 
             zeros = self.line.count(0)
+            oldline = self.line
             self.line = filter(lambda x : x > 0, self.line) + [0] * zeros  # heuristics, must only increase speed
 
             for pos in range(len(self.line)):
@@ -90,14 +90,18 @@ class testcase(object):
                                 self.line[pos] = 0
                                 effect = True
                                 break
+            if not effect:
+                self.line = oldline
 
             if ch == 'r':
                 self.line = self.line[::-1]
 
-            for x in range(len(self.line)):
-                self.line[x] = abs(self.line[x])
             if effect:
                 self.newtile()
+
+            for x in range(len(self.line)):
+                self.line[x] = abs(self.line[x])
+
         return ' '.join(map(str, self.line))
 
 
