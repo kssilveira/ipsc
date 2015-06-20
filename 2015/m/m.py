@@ -1,3 +1,4 @@
+import sys
 
 res = {}
 res[0] = "+[]"
@@ -35,16 +36,20 @@ for n in range(10, 1001):
       if len(test) < len(res[n]):
         # print "found", i, test
         res[n] = test
-  for i in range(1, n):
+  for i in range(6, n - 5):
     if not res[n - i].endswith('-[]'):
-      test = "%s+%s" % ((res[i]), (res[n - i]))
+      right = res[n - i]
+      if right.startswith('+'):
+        right = right[1:]
+      test = "%s+%s" % (((res[i])), (right))
       if len(test) < len(res[n]):
         # print "found", i, test
         res[n] = test
 
 for i, s in res.iteritems():
   if len(s) > 75:
-    print i, s  # 264, 235, 45
+    sys.stderr.write("%s, %s\n" % (i, s))
+    # print i, s  # 264, 235, 45
   # assert len(s) <= 75
   # print s
-  # print "console.log(%s);" % s
+  print "console.log(%s);" % s
