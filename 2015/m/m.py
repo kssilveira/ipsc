@@ -36,7 +36,7 @@ for n in range(10, 1001):
       if len(test) < len(res[n]):
         # print "found", i, test
         res[n] = test
-  for i in range(6, n - 5):
+  for i in range(1, n - 0):
     if not res[n - i].endswith('-[]'):
       right = res[n - i]
       if right.startswith('+'):
