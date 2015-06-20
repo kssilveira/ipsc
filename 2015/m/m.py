@@ -46,10 +46,21 @@ for n in range(10, 1001):
         # print "found", i, test
         res[n] = test
 
+for n in range(10, 1001):
+  for i in range(n + 1, 1001):
+    if not res[i - n].endswith('-[]'):
+      right = res[i - n]
+      # if right.startswith('+'):
+        # right = right[1:]
+      test = "%s-[%s]" % (((res[i])), (right))
+      if len(test) < len(res[n]):
+        # print "found", i, test
+        res[n] = test
+
 for i, s in res.iteritems():
   if len(s) > 75:
     sys.stderr.write("%s, %s\n" % (i, s))
-    # print i, s  # 264, 235, 45
+    # print i, s  # 264, 235, 45, 44, 8
   # assert len(s) <= 75
   # print s
   print "console.log(%s);" % s
