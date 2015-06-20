@@ -1,0 +1,169 @@
+00000000  BA3001            mov dx,0x130
+00000003  B409              mov ah,0x9
+00000005  CD21              int 0x21
+00000007  BE2002            mov si,0x220
+0000000A  BF5E02            mov di,0x25e
+0000000D  B90A00            mov cx,0xa
+00000010  BA0102            mov dx,0x201
+00000013  B401              mov ah,0x1
+00000015  CD21              int 0x21
+00000017  8805              mov [di],al
+00000019  28C8              sub al,cl
+0000001B  3A04              cmp al,[si]
+0000001D  7508              jnz 0x27
+0000001F  46                inc si
+00000020  47                inc di
+00000021  49                dec cx
+00000022  75EF              jnz 0x13
+00000024  BA3A02            mov dx,0x23a
+00000027  B409              mov ah,0x9
+00000029  CD21              int 0x21
+0000002B  B8004C            mov ax,0x4c00
+0000002E  CD21              int 0x21
+00000030  2A2A              sub ch,[bp+si]
+00000032  2A2A              sub ch,[bp+si]
+00000034  2A2A              sub ch,[bp+si]
+00000036  2A2A              sub ch,[bp+si]
+00000038  2A2A              sub ch,[bp+si]
+0000003A  2A2A              sub ch,[bp+si]
+0000003C  2A2A              sub ch,[bp+si]
+0000003E  2A2A              sub ch,[bp+si]
+00000040  2A2A              sub ch,[bp+si]
+00000042  2A2A              sub ch,[bp+si]
+00000044  2A2A              sub ch,[bp+si]
+00000046  2A2A              sub ch,[bp+si]
+00000048  2A2A              sub ch,[bp+si]
+0000004A  2A2A              sub ch,[bp+si]
+0000004C  2A2A              sub ch,[bp+si]
+0000004E  2A2A              sub ch,[bp+si]
+00000050  2A2A              sub ch,[bp+si]
+00000052  2A2A              sub ch,[bp+si]
+00000054  2A2A              sub ch,[bp+si]
+00000056  2A2A              sub ch,[bp+si]
+00000058  2A2A              sub ch,[bp+si]
+0000005A  2A2A              sub ch,[bp+si]
+0000005C  2A2A              sub ch,[bp+si]
+0000005E  2A2A              sub ch,[bp+si]
+00000060  2A2A              sub ch,[bp+si]
+00000062  2A2A              sub ch,[bp+si]
+00000064  2A2A              sub ch,[bp+si]
+00000066  2A2A              sub ch,[bp+si]
+00000068  2A2A              sub ch,[bp+si]
+0000006A  0D0A2A            or ax,0x2a0a
+0000006D  205765            and [bx+0x65],dl
+00000070  6C                insb
+00000071  636F6D            arpl [bx+0x6d],bp
+00000074  6520746F          and [gs:si+0x6f],dh
+00000078  207468            and [si+0x68],dh
+0000007B  6520496E          and [gs:bx+di+0x6e],cl
+0000007F  666C              o32 insb
+00000081  7565              jnz 0xe8
+00000083  6E                outsb
+00000084  7469              jz 0xef
+00000086  61                popaw
+00000087  6C                insb
+00000088  205068            and [bx+si+0x68],dl
+0000008B  696C6F7368        imul bp,[si+0x6f],word 0x6873
+00000090  6F                outsw
+00000091  7065              jo 0xf8
+00000093  7273              jc 0x108
+00000095  205363            and [bp+di+0x63],dl
+00000098  686F6F            push word 0x6f6f
+0000009B  6C                insb
+0000009C  204361            and [bp+di+0x61],al
+0000009F  6D                insw
+000000A0  7075              jo 0x117
+000000A2  7321              jnc 0xc5
+000000A4  202A              and [bp+si],ch
+000000A6  0D0A2A            or ax,0x2a0a
+000000A9  2A2A              sub ch,[bp+si]
+000000AB  2A2A              sub ch,[bp+si]
+000000AD  2A2A              sub ch,[bp+si]
+000000AF  2A2A              sub ch,[bp+si]
+000000B1  2A2A              sub ch,[bp+si]
+000000B3  2A2A              sub ch,[bp+si]
+000000B5  2A2A              sub ch,[bp+si]
+000000B7  2A2A              sub ch,[bp+si]
+000000B9  2A2A              sub ch,[bp+si]
+000000BB  2A2A              sub ch,[bp+si]
+000000BD  2A2A              sub ch,[bp+si]
+000000BF  2A2A              sub ch,[bp+si]
+000000C1  2A2A              sub ch,[bp+si]
+000000C3  2A2A              sub ch,[bp+si]
+000000C5  2A2A              sub ch,[bp+si]
+000000C7  2A2A              sub ch,[bp+si]
+000000C9  2A2A              sub ch,[bp+si]
+000000CB  2A2A              sub ch,[bp+si]
+000000CD  2A2A              sub ch,[bp+si]
+000000CF  2A2A              sub ch,[bp+si]
+000000D1  2A2A              sub ch,[bp+si]
+000000D3  2A2A              sub ch,[bp+si]
+000000D5  2A2A              sub ch,[bp+si]
+000000D7  2A2A              sub ch,[bp+si]
+000000D9  2A2A              sub ch,[bp+si]
+000000DB  2A2A              sub ch,[bp+si]
+000000DD  2A2A              sub ch,[bp+si]
+000000DF  2A2A              sub ch,[bp+si]
+000000E1  2A0D              sub cl,[di]
+000000E3  0A0D              or cl,[di]
+000000E5  0A5768            or dl,[bx+0x68]
+000000E8  61                popaw
+000000E9  7420              jz 0x10b
+000000EB  6973207468        imul si,[bp+di+0x20],word 0x6874
+000000F0  65207365          and [gs:bp+di+0x65],dh
+000000F4  637265            arpl [bp+si+0x65],si
+000000F7  7420              jz 0x119
+000000F9  776F              ja 0x16a
+000000FB  7264              jc 0x161
+000000FD  3F                aas
+000000FE  0D0A24            or ax,0x240a
+00000101  0D0A0D            or ax,0xd0a
+00000104  0A596F            or bl,[bx+di+0x6f]
+00000107  7520              jnz 0x129
+00000109  61                popaw
+0000010A  7265              jc 0x171
+0000010C  206E6F            and [bp+0x6f],ch
+0000010F  7420              jz 0x131
+00000111  6F                outsw
+00000112  7572              jnz 0x186
+00000114  207374            and [bp+di+0x74],dh
+00000117  7564              jnz 0x17d
+00000119  656E              gs outsb
+0000011B  7421              jz 0x13e
+0000011D  0D0A24            or ax,0x240a
+00000120  37                aaa
+00000121  69616C6E6A        imul sp,[bx+di+0x6c],word 0x6a6e
+00000126  7062              jo 0x18a
+00000128  6A64              push byte +0x64
+0000012A  0D0A52            or ax,0x520a
+0000012D  45                inc bp
+0000012E  44                inc sp
+0000012F  204845            and [bx+si+0x45],cl
+00000132  52                push dx
+00000133  52                push dx
+00000134  49                dec cx
+00000135  4E                dec si
+00000136  47                inc di
+00000137  210D              and [di],cx
+00000139  0A0D              or cl,[di]
+0000013B  0A0D              or cl,[di]
+0000013D  0A496E            or cl,[bx+di+0x6e]
+00000140  646565642120      and [fs:bx+si],sp
+00000146  54                push sp
+00000147  686520            push word 0x2065
+0000014A  61                popaw
+0000014B  6E                outsb
+0000014C  7377              jnc 0x1c5
+0000014E  657220            gs jc 0x171
+00000151  796F              jns 0x1c2
+00000153  7520              jnz 0x175
+00000155  7365              jnc 0x1bc
+00000157  656B2069          imul sp,[gs:bx+si],byte +0x69
+0000015B  7320              jnc 0x17d
+0000015D  225079            and dl,[bx+si+0x79]
+00000160  7468              jz 0x1ca
+00000162  61                popaw
+00000163  676F              a32 outsw
+00000165  7261              jc 0x1c8
+00000167  7322              jnc 0x18b
+00000169  2E0D0A24          cs or ax,0x240a
