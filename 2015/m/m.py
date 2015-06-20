@@ -14,6 +14,13 @@ res[9] = "[!![]+!![]+!![]]*[!![]+!![]+!![]]"
 # for i in range(2, 10):
   # res[i] = res[i - 1] + res[1]
 
+def smaller(x):
+  if x.endswith('-[]'):
+    res = x[:-len('-[]')]
+    # print 'returning', x, res
+    return res
+  return x
+
 for n in range(10, 1001):
   s = str(n)
   res[n] = ""
@@ -24,16 +31,20 @@ for n in range(10, 1001):
   res[n] += "-[]"
   for i in range(2, n/2 + 1):
     if n % i == 0:
-      test = "[%s]*[%s]" % (res[i], res[n / i])
+      test = "[%s]*[%s]" % (smaller(res[i]), smaller(res[n / i]))
+      if len(test) < len(res[n]):
+        # print "found", i, test
+        res[n] = test
+  for i in range(1, n):
+    if not res[n - i].endswith('-[]'):
+      test = "%s+%s" % ((res[i]), (res[n - i]))
       if len(test) < len(res[n]):
         # print "found", i, test
         res[n] = test
 
 for i, s in res.iteritems():
   if len(s) > 75:
-    print i, s  # 264
+    print i, s  # 264, 235, 45
   # assert len(s) <= 75
   # print s
   # print "console.log(%s);" % s
-
-
